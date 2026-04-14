@@ -31,7 +31,19 @@ const filteredCountries = countries.filter((country) => {
 });
 
 return(
-  
+    <div className ="container">
+      <h1> Countries-App </h1>
+
+      // Region Filtrage
+      <select onChange={(e) => setRegion(e.target.value)}>
+      <option value="">Toutes les régions</option>
+      {regions.map((r) => (
+        <option key = {r} value ={r}>{r}</option>
+      ))}
+      </select>
+
+      <input onChange={} type="text" />
+    </div>
 );
 
 
