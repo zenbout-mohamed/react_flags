@@ -46,7 +46,7 @@ return(
     <div className ="container">
       <h1> Countries-App </h1>
 
-      // Region Filtrage
+      // ----------Region Filtrage
       <select onChange={(e) => setRegion(e.target.value)}>
       <option value="">Toutes les régions</option>
       {regions.map((r) => (
