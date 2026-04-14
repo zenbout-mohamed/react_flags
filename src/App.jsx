@@ -8,11 +8,19 @@ export default function App (){
   const [region, setRegion = useState("");
   const [search, setSearch] = useState("");
 
-
-
-  // ----------------------
+  // ------------------------------
 
   const regions=["Afrique","Europe","Asie","Amérique","Océanie"];
-  
+
+
+//  Appels de l'API
+
+useEffect(() => {
+    axios.get("https://restcountries.com/v3.1/all")
+    .then(res => setCountries(res.data))
+    .catch(err => console.log(err));
+}, []);
+
+
 
 }
