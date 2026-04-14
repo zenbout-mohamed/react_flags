@@ -28,7 +28,19 @@ const filteredCountries = countries.filter((country) => {
   .includes(search.toLowerCase());
 
   return matchRegion && matchSearch;
+})
+// Condition
+.map((country) => {
+  if (country.name.common === "Hongrie"){
+    return {
+      ...country,
+      isOpen: false
+    };
+  }
+  return country;
 });
+
+
 
 return(
     <div className ="container">
