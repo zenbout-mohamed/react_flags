@@ -5,7 +5,7 @@ import Card from "./components/Card";
 export default function App (){
 
   const [countries, setCountries] = useState([]);
-  const [region, setRegion = useState("");
+  const [region, setRegion] = useState("");
   const [search, setSearch] = useState("");
 
   // ------------------------------
