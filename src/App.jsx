@@ -42,7 +42,13 @@ return(
       ))}
       </select>
 
-      <input onChange={} type="text" />
+      // Recherche-------------
+      <input onChange={(e) => setSearch(e.target.value)} type="text"  placeholder="Rechercher un pays :"/>
+
+      // Compteur -------------
+      <p>{filteredCountries.length} pays Affichés :</p>
+
+      
     </div>
 );
 
