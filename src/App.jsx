@@ -8,37 +8,44 @@ export default function App (){
   const [region, setRegion] = useState("");
   const [search, setSearch] = useState("");
 
-  // ------------------------------
 
-  const regions=["Afrique","Europe","Asie","Amérique","Océanie"];
+  const regions=["Africa","Europe","Asia","Americas","Oceania"];
 
-
-//  Appels de l'API
 useEffect(() => {
-    axios.get("https://restcountries.com/v3.1/all")
-    .then(res => setCountries(res.data))
-    .catch(err => console.log(err));
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(
+        "https://restcountries.com/v3.1/all?fields=name,flags,capital,region,cca3"
+      );
+
+      setCountries(res.data);
+    } catch (error) {
+      console.log("Erreur API :", error);
+    }
+  };
+
+  fetchData();
 }, []);
 
-// Filtrage
-const filteredCountries = countries.filter((country) => {
-  const matchRegion = region ? country.region === region : true;
-  const matchSearch = country.name.common 
-  .toLowerCase()
-  .includes(search.toLowerCase());
+const filteredCountries = countries
+  .filter((country) => {
+    const matchRegion = region ? country.region === region : true;
 
-  return matchRegion && matchSearch;
-})
-// Condition
-.map((country) => {
-  if (country.name.common === "Hongrie"){
-    return {
-      ...country,
-      isOpen: false
-    };
-  }
-  return country;
-});
+    const matchSearch =
+      search === ""
+        ? true
+        : country.name?.common
+            ?.toLowerCase()
+            .includes(search.toLowerCase());
+
+    return matchRegion && matchSearch;
+  })
+  .map((country) => {
+    if (country.name.common === "Hungary") {
+      return { ...country, isOpen: false };
+    }
+    return country;
+  });
 
 
 
@@ -46,7 +53,6 @@ return(
     <div className ="container">
       <h1> Countries-App </h1>
 
-      // ----------Region Filtrage
       <select onChange={(e) => setRegion(e.target.value)}>
       <option value="">Toutes les régions</option>
       {regions.map((r) => (
@@ -54,13 +60,13 @@ return(
       ))}
       </select>
 
-      // Recherche-------------
-      <input onChange={(e) => setSearch(e.target.value)} type="text"  placeholder="Rechercher un pays :"/>
+      
+      <input onChange={(e) => setSearch(e.target.value)} type="text" value={search} placeholder="Rechercher un pays :"/>
 
-      // Compteur -------------
+      
       <p>{filteredCountries.length} pays Affichés :</p>
 
-      // Liste -------------
+      
       <div className="liste">
         {filteredCountries.map((country) => (
           <Card key ={country.cca3} country ={country}/>
