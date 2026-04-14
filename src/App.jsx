@@ -48,10 +48,13 @@ return(
       // Compteur -------------
       <p>{filteredCountries.length} pays Affichés :</p>
 
-      
+      // Liste -------------
+      <div className="liste">
+        {filteredCountries.map((country) => (
+          <Card key ={country.cca3} country ={country}/>
+        ))}      
+      </div>
+
     </div>
 );
-
-
-
 }
